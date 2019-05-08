@@ -1,6 +1,6 @@
 <template>
 	<div class="campaign">
-		<div class="campaign__head">
+		<div class="campaign__head" :style="campaignStyle">
             <h3 class="title black-reg-18">{{campaign.name}}</h3>
             <div class="type grey-reg-12"><span>{{campaign.type}}</span></div>
         </div>
@@ -43,6 +43,18 @@ export default {
     computed: {
         progress() {
             return this.campaign.progress + '% (' + this.campaign.days_total + '/' + this.campaign.days_passed + ' days)'
+        },
+        campaignStyle() {
+            switch (this.campaign.type) {
+                case 'Challenge':
+                    return 'border-top-color: #c78bd1'
+                case 'Influencer campaign':
+                    return 'border-top-color: #6e9be4'
+                case 'Giveaway':
+                    return 'border-top-color: #6287c2'
+                default:
+                    return 'border-top-color: #c78bd1'
+            }
         }
     }
 }
@@ -53,16 +65,57 @@ export default {
     border-radius: 1px;
     background-color: #fff;
     box-shadow: 0px 1px 1px 0px #b6b6b6;
+    columns: #6287c2;
     
     &__head {
         padding: 7px 12px;
         text-align: left;
+        border-top-width: 3px;
+        border-top-style: solid;
         border-bottom: 1px solid #e6e6e6;
 
         .title {
             margin: 0;
         }
     }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        border-top: 3px solid #46cfbb;
+    }
+}
+
+.statistic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 15px;
+    padding: 12px 12px 5px;
+
+    &__item {
+        &-label {
+            text-transform: uppercase;
+            font-size: 10px;
+            color: #5a5a5a;
+        }
+
+        &-data {
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+
+    &_small {
+        margin: 5px;
+        font-size: 10px;
+        color: #c4c4c4;
+    }
+}
+
+.link {
+    font-size: 12px;
 }
 </style>
 

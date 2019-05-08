@@ -5,23 +5,33 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    color: #2c3e50;
+    letter-spacing: -.2px;
+    color: #363636;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 180ms ease;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .grid {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 20px auto;
 
     &__head {
         padding: 10px;
-        background-color: #f3f3f3;
         border-bottom: 2px solid #e2e2e2;
+        background-color: #fafafa;
     }
 
     &__body {
-        padding: 5px 5px 20px;
-        background-color: #f3f3f3;
+        background-color: #fafafa;
     }
 }
 
@@ -35,4 +45,33 @@ body {
     font-weight: 400;
     font-size: 12px;
     color: #929292;
+}
+
+.link {
+    letter-spacing: -.7px;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    transition: 180ms ease;
+
+    &_black {
+        color: #363636;
+
+        &:hover {
+            color: #000000;
+            text-decoration: underline;
+        }
+    }
+
+    &_blue {
+        color: #43a4ff;
+
+        &:hover {
+            color: #2771b6;
+            text-decoration: underline;
+        }
+    }
 }

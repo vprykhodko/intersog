@@ -5,6 +5,10 @@
 			:key="index">
 				<Campaign :campaign="item" />
 			</div>
+			<div class="more">
+				<span class="more__count">+5</span>
+				<span class="more__label">more to show</span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -23,10 +27,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dashboard__list {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 10px;
+.dashboard {
+	padding: 5px 5px 20px;
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 12px;
+	}
+
+	.more {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		color: #929292;
+		cursor: pointer;
+		transition: 180m ease;
+
+		&:hover {
+			background-color: #fff;
+		}
+		
+		&__count {
+			margin-bottom: 5px;
+			font-size: 32px;
+		}
+
+		&__label {
+			text-transform: uppercase;
+			font-size: 16px;
+		}
+	}
 }
 </style>
 
