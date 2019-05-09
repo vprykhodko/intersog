@@ -1,6 +1,6 @@
 <template>
-	<div class="campaign">
-		<div class="campaign__head" :style="campaignStyle">
+    <div class="campaign">
+        <div class="campaign__head" :style="campaignStyle">
             <h3 class="title black-reg-18">{{campaign.name}}</h3>
             <div class="type grey-reg-12"><span>{{campaign.type}}</span></div>
         </div>
@@ -26,10 +26,10 @@
             <div class="statistic_small"><span>{{progress}}</span></div>
         </div>
         <div class="campaign__footer">
-            <button class="link link_black">hide</button>
+            <button class="link link_black" @click="hide">hide</button>
             <button class="link link_blue" @click="$router.push({name: 'deatailsPage', params: {dataTransfer: campaign.id}})">show details</button>
         </div>
-	</div>
+    </div>
 </template>
 
 <script>
@@ -40,11 +40,16 @@ export default {
             type: Object
         }
     },
+    methods: {
+        hide () {
+            this.$emit('hide', this.campaign.id)
+        }
+    },
     computed: {
-        progress() {
+        progress () {
             return this.campaign.progress + '% (' + this.campaign.days_total + '/' + this.campaign.days_passed + ' days)'
         },
-        campaignStyle() {
+        campaignStyle () {
             switch (this.campaign.type) {
                 case 'Challenge':
                     return 'border-top-color: #c78bd1'
@@ -65,7 +70,6 @@ export default {
     border-radius: 1px;
     background-color: #fff;
     box-shadow: 0px 1px 1px 0px #b6b6b6;
-    columns: #6287c2;
     
     &__head {
         padding: 7px 12px;

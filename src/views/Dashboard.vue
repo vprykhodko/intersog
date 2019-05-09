@@ -1,12 +1,13 @@
 <template>
 	<div class="dashboard">
 		<div class="dashboard__list">
-			<div v-for="(item, index) in campaigns"
-			:key="index">
-				<Campaign :campaign="item" />
+			<div v-for="(item, index) in campaignsVisible"
+			:key="index"
+			class="dashboard__list-item">
+				<Campaign :campaign="item" @hide="hide" />
 			</div>
-			<div class="more">
-				<span class="more__count">+5</span>
+			<div class="more" v-if="campaignsLeft">
+				<span class="more__count">+ {{campaignsLeft}}</span>
 				<span class="more__label">more to show</span>
 			</div>
 		</div>
@@ -21,8 +22,47 @@ export default {
 	name: 'Dashboard',
 	components: {Campaign},
 	data: () => ({
-		campaigns: data.campaigns
-	})
+		campaignsList: data.campaigns,
+		campaignsCount: 7
+	}),
+	methods: {
+        hide (value) {
+            this.campaignsVisible = value
+        }
+    },
+	computed: {
+		campaignsVisible: {
+			get () {
+				let array = this.campaignsList
+
+				if (array.length <= 7) {
+					this.campaignCount = array.length
+				} else {
+					this.campaignCount = 7
+				}
+
+				return array.slice(0, this.campaignCount)
+			},
+			set (id) {
+				this.campaignsList = this.campaignsList.filter(function(campaign) {
+					return campaign.id !== id
+				})
+			}
+		},
+		campaignsLeft: {
+			get () {
+				let array = this.campaignsList
+
+				if (array.length - this.campaignsCount < 7 && array.length - this.campaignsCount > 0) {
+					return array.length - this.campaignsCount
+				} if (array.length - this.campaignsCount <= 0) {
+					return 0
+				} else {
+					return 7
+				}
+			}
+		}
+	}
 }
 </script>
 
