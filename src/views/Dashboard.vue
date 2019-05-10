@@ -6,7 +6,7 @@
 			class="dashboard__list-item">
 				<Campaign :campaign="item" @hide="hide" />
 			</div>
-			<div class="more" v-if="campaignsLeft">
+			<div class="more" v-if="campaignsLeft" @click="showMore(campaignsLeft)">
 				<span class="more__count">+ {{campaignsLeft}}</span>
 				<span class="more__label">more to show</span>
 			</div>
@@ -28,20 +28,26 @@ export default {
 	methods: {
         hide (value) {
             this.campaignsVisible = value
-        }
+		},
+		showMore (number) {
+			if (number < 7) {
+				this.campaignsCount += number
+			} else {
+				this.campaignsCount += 7
+			}
+		}
     },
 	computed: {
 		campaignsVisible: {
 			get () {
 				let array = this.campaignsList
+				let count = this.campaignsCount
 
-				if (array.length <= 7) {
-					this.campaignCount = array.length
-				} else {
-					this.campaignCount = 7
+				if (array.length <= count) {
+					count = array.length
 				}
 
-				return array.slice(0, this.campaignCount)
+				return array.slice(0, count)
 			},
 			set (id) {
 				this.campaignsList = this.campaignsList.filter(function(campaign) {
@@ -52,10 +58,11 @@ export default {
 		campaignsLeft: {
 			get () {
 				let array = this.campaignsList
+				let count = this.campaignsCount
 
-				if (array.length - this.campaignsCount < 7 && array.length - this.campaignsCount > 0) {
-					return array.length - this.campaignsCount
-				} if (array.length - this.campaignsCount <= 0) {
+				if (array.length - count < 7 && array.length - count > 0) {
+					return array.length - count
+				} if (array.length - count <= 0) {
 					return 0
 				} else {
 					return 7

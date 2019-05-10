@@ -27,7 +27,7 @@
         </div>
         <div class="campaign__footer">
             <button class="link link_black" @click="hide">hide</button>
-            <button class="link link_blue" @click="$router.push({name: 'deatailsPage', params: {dataTransfer: campaign.id}})">show details</button>
+            <button class="link link_blue" @click="$router.push({name: 'deatailsPage', params: {dataTransfer: campaign.name}})">show details</button>
         </div>
     </div>
 </template>
@@ -83,38 +83,17 @@ export default {
         }
     }
 
+    &__body {
+        .statistic {
+            grid-template-rows: 1fr 1fr;
+        }
+    }
+
     &__footer {
         display: flex;
         justify-content: space-between;
         padding: 12px;
         border-top: 3px solid #46cfbb;
-    }
-}
-
-.statistic {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 15px;
-    padding: 12px 12px 5px;
-
-    &__item {
-        &-label {
-            text-transform: uppercase;
-            font-size: 10px;
-            color: #5a5a5a;
-        }
-
-        &-data {
-            font-size: 24px;
-            font-weight: 700;
-        }
-    }
-
-    &_small {
-        margin: 5px;
-        font-size: 10px;
-        color: #c4c4c4;
     }
 }
 
